@@ -2,7 +2,7 @@
 
 # Currency Picker for Android
 
- [![](https://jitpack.io/v/hees-k/currency-picker-android.svg)](https://jitpack.io/#hees-k/currency-picker-android)  [![](https://travis-ci.org/hees-k/currency-picker-android.svg?branch=master)](https://travis-ci.org/hees-k/currency-picker-android) [![](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/heeseok7)
+ [![](https://jitpack.io/v/hees-k/currency-picker-android.svg)](https://jitpack.io/#hees-k/currency-picker-android) [![](https://travis-ci.com/hees-k/currency-picker-android.svg?branch=master)](https://travis-ci.com/hees-k/currency-picker-android) [![](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/heeseok7)
 
 CurrencyPicker is a simple library that can be show a currency picker. See the example to see more detail. Heavily inspired by https://github.com/mukeshsolanki/country-picker-android
 
