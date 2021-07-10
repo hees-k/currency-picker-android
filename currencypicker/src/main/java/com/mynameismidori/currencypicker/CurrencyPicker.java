@@ -1,10 +1,8 @@
 package com.mynameismidori.currencypicker;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
+import androidx.fragment.app.DialogFragment;
 
 public class CurrencyPicker extends DialogFragment {
 
@@ -47,7 +47,7 @@ public class CurrencyPicker extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.currency_picker, null);
+        View view = inflater.inflate(R.layout.currency_picker, container, false);
         Bundle args = getArguments();
         if (args != null && getDialog() != null) {
             String dialogTitle = args.getString("dialogTitle");
@@ -57,8 +57,8 @@ public class CurrencyPicker extends DialogFragment {
             int height = getResources().getDimensionPixelSize(R.dimen.cp_dialog_height);
             getDialog().getWindow().setLayout(width, height);
         }
-        searchEditText = (EditText) view.findViewById(R.id.currency_code_picker_search);
-        currencyListView = (ListView) view.findViewById(R.id.currency_code_picker_listview);
+        searchEditText = view.findViewById(R.id.currency_code_picker_search);
+        currencyListView = view.findViewById(R.id.currency_code_picker_list_view);
 
         selectedCurrenciesList = new ArrayList<>(currenciesList.size());
         selectedCurrenciesList.addAll(currenciesList);
@@ -102,7 +102,7 @@ public class CurrencyPicker extends DialogFragment {
         if (getDialog() != null) {
             super.dismiss();
         } else {
-            getFragmentManager().popBackStack();
+            getActivity().getSupportFragmentManager().popBackStack();
         }
     }
 

@@ -3,10 +3,7 @@ package com.mynameismidori.currencypickerexample;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +18,9 @@ import com.mynameismidori.currencypicker.ExtendedCurrency;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class CurrencyFragment extends Fragment implements View.OnClickListener, CurrencyPickerListener, SharedPreferences.OnSharedPreferenceChangeListener {
     View view;
@@ -39,21 +39,20 @@ public class CurrencyFragment extends Fragment implements View.OnClickListener, 
 
             view = inflater.inflate(R.layout.fragment_currency, container, false);
 
-
-            mCurrencyNameTextView = (TextView) view.findViewById(R.id.selected_currency_name_text_view);
-            mCurrencyIsoCodeTextView = (TextView) view.findViewById(R.id.selected_currency_iso_text_view);
-            mCurrencySymbolTextView = (TextView) view.findViewById(R.id.selected_currency_symbol_text_view);
-            mPickCurrencyButton = (Button) view.findViewById(R.id.currency_picker_button);
-            mOpenFragmentButton = (Button) view.findViewById(R.id.openFragment);
-            mOpenPreferenceButton = (Button) view.findViewById(R.id.openPreferences);
-            mCurrencyFlagImageView = (ImageView) view.findViewById(R.id.selected_currency_flag_image_view);
+            mCurrencyNameTextView = view.findViewById(R.id.selected_currency_name_text_view);
+            mCurrencyIsoCodeTextView = view.findViewById(R.id.selected_currency_iso_text_view);
+            mCurrencySymbolTextView = view.findViewById(R.id.selected_currency_symbol_text_view);
+            mPickCurrencyButton = view.findViewById(R.id.currency_picker_button);
+            mOpenFragmentButton = view.findViewById(R.id.openFragment);
+            mOpenPreferenceButton = view.findViewById(R.id.openPreferences);
+            mCurrencyFlagImageView = view.findViewById(R.id.selected_currency_flag_image_view);
             mCurrencyPicker = CurrencyPicker.newInstance("Select Currency");
 
             mPickCurrencyButton.setOnClickListener(this);
             mOpenFragmentButton.setOnClickListener(this);
             mOpenPreferenceButton.setOnClickListener(this);
 
-            mTextView = (TextView) view.findViewById(R.id.selectedCurrencyPreference);
+            mTextView = view.findViewById(R.id.selectedCurrencyPreference);
             preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
             preferences.registerOnSharedPreferenceChangeListener(this);
 
@@ -118,7 +117,7 @@ public class CurrencyFragment extends Fragment implements View.OnClickListener, 
         //do what you want to do when button is clicked
         switch (v.getId()) {
             case R.id.currency_picker_button:
-                mCurrencyPicker.show(getFragmentManager(), "CURRENCY_PICKER");
+                mCurrencyPicker.show(getActivity().getSupportFragmentManager(), "CURRENCY_PICKER");
                 break;
             case R.id.openPreferences:
                 Intent intent = new Intent(getActivity(), CurrencySettingsActivity.class);
@@ -126,7 +125,7 @@ public class CurrencyFragment extends Fragment implements View.OnClickListener, 
                 break;
             case R.id.openFragment:
 
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
                 transaction.replace(R.id.container, mCurrencyPicker, "currencyFragment");
                 transaction.addToBackStack(null);

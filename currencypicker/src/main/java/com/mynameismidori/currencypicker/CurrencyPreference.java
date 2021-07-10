@@ -13,7 +13,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -42,7 +41,6 @@ public class CurrencyPreference extends ListPreference implements SharedPreferen
     private String selectedCurrencyCode, defaultCurrencyCode;
 
     SharedPreferences preferences;
-    SharedPreferences.Editor editor;
 
     public CurrencyPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -52,10 +50,7 @@ public class CurrencyPreference extends ListPreference implements SharedPreferen
 
         setCurrenciesList(ExtendedCurrency.getAllCurrencies());
 
-        editor = preferences.edit();
-
         setSummary(preferences.getString(getKey(), getValue()));
-
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.attrs_currency, 0, 0);
         try {
@@ -81,8 +76,8 @@ public class CurrencyPreference extends ListPreference implements SharedPreferen
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.currency_picker, null);
 
-        searchEditText = (EditText) view.findViewById(R.id.currency_code_picker_search);
-        currencyListView = (ListView) view.findViewById(R.id.currency_code_picker_listview);
+        searchEditText = view.findViewById(R.id.currency_code_picker_search);
+        currencyListView = view.findViewById(R.id.currency_code_picker_list_view);
 
         searchEditText.addTextChangedListener(new TextWatcher() {
 
@@ -100,8 +95,8 @@ public class CurrencyPreference extends ListPreference implements SharedPreferen
             }
         });
 
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linear_layout);
-        ListView currencyListView = (ListView) view.findViewById(R.id.currency_code_picker_listview);
+        LinearLayout linearLayout = view.findViewById(R.id.linear_layout);
+        ListView currencyListView = view.findViewById(R.id.currency_code_picker_list_view);
 
         selectedCurrenciesList = new ArrayList<>(currenciesList.size());
         selectedCurrenciesList.addAll(currenciesList);
@@ -117,8 +112,10 @@ public class CurrencyPreference extends ListPreference implements SharedPreferen
                 ExtendedCurrency currency = selectedCurrenciesList.get(position);
                 setValue(currency.getCode());
                 setSummary(currency.getCode());
+
+                SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(getKey(), currency.getCode());
-                editor.commit();
+                editor.apply();
                 getDialog().dismiss();
             }
         });

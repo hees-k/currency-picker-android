@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.preference.MultiSelectListPreference;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -35,14 +34,12 @@ public class MultiCurrencyPreference extends MultiSelectListPreference {
     private List<ExtendedCurrency> selectedCurrenciesList = new ArrayList<>();
 
     SharedPreferences preferences;
-    SharedPreferences.Editor editor;
 
     public MultiCurrencyPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setCurrenciesList(ExtendedCurrency.getAllCurrencies());
 
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        editor = preferences.edit();
     }
 
     @Override
@@ -51,8 +48,8 @@ public class MultiCurrencyPreference extends MultiSelectListPreference {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.currency_picker, null);
 
-        searchEditText = (EditText) view.findViewById(R.id.currency_code_picker_search);
-        currencyListView = (ListView) view.findViewById(R.id.currency_code_picker_listview);
+        searchEditText = view.findViewById(R.id.currency_code_picker_search);
+        currencyListView = view.findViewById(R.id.currency_code_picker_list_view);
 
         searchEditText.addTextChangedListener(new TextWatcher() {
 
@@ -70,8 +67,8 @@ public class MultiCurrencyPreference extends MultiSelectListPreference {
             }
         });
 
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linear_layout);
-        ListView currencyListView = (ListView) view.findViewById(R.id.currency_code_picker_listview);
+        LinearLayout linearLayout = view.findViewById(R.id.linear_layout);
+        ListView currencyListView = view.findViewById(R.id.currency_code_picker_list_view);
 
         selectedCurrenciesList = new ArrayList<>(currenciesList.size());
         selectedCurrenciesList.addAll(currenciesList);
@@ -95,8 +92,9 @@ public class MultiCurrencyPreference extends MultiSelectListPreference {
 
     @Override
     protected void onDialogClosed(boolean positiveResult) {
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putStringSet(getKey(), getValues());
-        editor.commit();
+        editor.apply();
         super.onDialogClosed(positiveResult);
     }
 

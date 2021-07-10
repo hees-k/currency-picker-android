@@ -1,7 +1,6 @@
 package com.mynameismidori.currencypicker;
 
 import android.content.Context;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -81,7 +79,7 @@ public class MultiCurrencyListAdapter extends BaseAdapter implements CompoundBut
         final ExtendedCurrency currency = currencies.get(position);
 
         if (view == null)
-            view = inflater.inflate(R.layout.row, null);
+            view = inflater.inflate(R.layout.row, parent, false);
 
         Cell cell = Cell.from(view);
         cell.textView.setText(currency.getName());

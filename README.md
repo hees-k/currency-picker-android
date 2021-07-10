@@ -2,13 +2,13 @@
 
 # Currency Picker for Android
 
- [![](https://jitpack.io/v/midorikocak/currency-picker-android.svg)](https://jitpack.io/#midorikocak/currency-picker-android)  [![](https://travis-ci.org/midorikocak/currency-picker-android.svg?branch=master)](https://travis-ci.org/midorikocak/currency-picker-android) [![](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/midorikocak)
+ [![](https://jitpack.io/v/hees-k/currency-picker-android.svg)](https://jitpack.io/#hees-k/currency-picker-android)  [![](https://travis-ci.org/hees-k/currency-picker-android.svg?branch=master)](https://travis-ci.org/hees-k/currency-picker-android) [![](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/heeseok7)
 
 CurrencyPicker is a simple library that can be show a currency picker. See the example to see more detail. Heavily inspired by https://github.com/mukeshsolanki/country-picker-android
 
 Flags are from https://github.com/transferwise/currency-flags.
 
-![](https://raw.githubusercontent.com/midorikocak/currency-picker-android/master/screenshot.png)
+![](https://raw.githubusercontent.com/hees-k/currency-picker-android/master/screenshot.png)
 
 ## How to use
 
@@ -31,7 +31,7 @@ Step 2\. Add the dependency
 
 ```java
 dependencies {
-        compile 'com.github.midorikocak:currency-picker-android:1.2.1'
+        compile 'com.github.hees-k:currency-picker-android:1.2.2'
 }
 ```
 

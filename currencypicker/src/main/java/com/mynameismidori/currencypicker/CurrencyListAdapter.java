@@ -22,8 +22,6 @@ public class CurrencyListAdapter extends BaseAdapter {
         inflater = LayoutInflater.from(context);
     }
 
-
-
     @Override
     public int getCount() {
         return currencies.size();
@@ -44,7 +42,7 @@ public class CurrencyListAdapter extends BaseAdapter {
         ExtendedCurrency currency = currencies.get(position);
 
         if (view == null)
-            view = inflater.inflate(R.layout.row, null);
+            view = inflater.inflate(R.layout.row, parent, false);
 
         Cell cell = Cell.from(view);
         cell.textView.setText(currency.getName());
@@ -56,8 +54,8 @@ public class CurrencyListAdapter extends BaseAdapter {
     }
 
     static class Cell {
-        public TextView textView;
-        public ImageView imageView;
+        TextView textView;
+        ImageView imageView;
 
         static Cell from(View view) {
             if (view == null)
@@ -65,8 +63,8 @@ public class CurrencyListAdapter extends BaseAdapter {
 
             if (view.getTag() == null) {
                 Cell cell = new Cell();
-                cell.textView = (TextView) view.findViewById(R.id.row_title);
-                cell.imageView = (ImageView) view.findViewById(R.id.row_icon);
+                cell.textView = view.findViewById(R.id.row_title);
+                cell.imageView = view.findViewById(R.id.row_icon);
                 view.setTag(cell);
                 return cell;
             } else {
