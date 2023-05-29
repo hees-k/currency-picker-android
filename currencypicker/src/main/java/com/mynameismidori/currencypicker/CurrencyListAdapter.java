@@ -1,5 +1,6 @@
 package com.mynameismidori.currencypicker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ public class CurrencyListAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         ExtendedCurrency currency = currencies.get(position);
@@ -45,7 +47,7 @@ public class CurrencyListAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.row, parent, false);
 
         Cell cell = Cell.from(view);
-        cell.textView.setText(currency.getName());
+        cell.textView.setText(currency.getCode() + " - " + currency.getName());
 
         currency.loadFlagByCode(mContext);
         if (currency.getFlag() != -1)
