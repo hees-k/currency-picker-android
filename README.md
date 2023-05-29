@@ -31,7 +31,7 @@ Step 2\. Add the dependency
 
 ```java
 dependencies {
-        compile 'com.github.hees-k:currency-picker-android:1.2.2'
+        compile 'com.github.hees-k:currency-picker-android:1.2.3'
 }
 ```
 
