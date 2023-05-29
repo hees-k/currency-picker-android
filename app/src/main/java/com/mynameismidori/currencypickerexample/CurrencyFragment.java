@@ -115,23 +115,25 @@ public class CurrencyFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         //do what you want to do when button is clicked
-        switch (v.getId()) {
-            case R.id.currency_picker_button:
-                mCurrencyPicker.show(getActivity().getSupportFragmentManager(), "CURRENCY_PICKER");
-                break;
-            case R.id.openPreferences:
-                Intent intent = new Intent(getActivity(), CurrencySettingsActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.openFragment:
+        if (v.getId() == R.id.currency_picker_button) {
+            mCurrencyPicker.show(getActivity().getSupportFragmentManager(), "CURRENCY_PICKER");
+            return;
+        }
 
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        if (v.getId() == R.id.openPreferences) {
+            Intent intent = new Intent(getActivity(), CurrencySettingsActivity.class);
+            startActivity(intent);
+            return;
+        }
 
-                transaction.replace(R.id.container, mCurrencyPicker, "currencyFragment");
-                transaction.addToBackStack(null);
+        if (v.getId() == R.id.openFragment) {
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-                transaction.commit();
-                break;
+            transaction.replace(R.id.container, mCurrencyPicker, "currencyFragment");
+            transaction.addToBackStack(null);
+
+            transaction.commit();
+            return;
         }
     }
 
