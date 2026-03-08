@@ -32,12 +32,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
 }
 
 dependencies {
@@ -47,6 +41,11 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 }
 
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
 publishing {
     publications {
         release(MavenPublication) {
@@ -54,7 +53,7 @@ publishing {
             artifactId = 'currency-picker-android'
             version = System.getenv("RELEASE_VERSION")
             artifact("$buildDir/outputs/aar/currencypicker-release.aar")
-            artifact(tasks.named("releaseSourcesJar"))
+            artifact(sourcesJar)
         }
     }
 
