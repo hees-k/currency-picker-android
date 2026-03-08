@@ -43,7 +43,7 @@ jobs:
       run: ./gradlew build
 
     - name: Publish to GitHub Package Registry 🚀
-      run: bash ./gradlew :currencypicker:publish
+      run: bash ./gradlew :currencypicker:publish --info
       env:
         GPR_USER: ${{ github.actor }}
         GPR_KEY: ${{ secrets.PAT_TOKEN }}
