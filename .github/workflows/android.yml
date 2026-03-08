@@ -49,11 +49,3 @@ jobs:
         GPR_KEY: ${{ secrets.PAT_TOKEN }}
         RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
 
-    - name: Upload Library AAR 🗳
-      uses: softprops/action-gh-release@v2
-      with:
-        token: ${{ secrets.PAT_TOKEN }}
-        # repository: ${{ github.repository }}
-        repository: hees-k/forked_libraries
-        tag_name: currency-picker-${{ env.RELEASE_VERSION }}
-        files: currencypicker/build/outputs/aar/currencypicker-release.aar
