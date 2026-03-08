@@ -54,6 +54,10 @@ publishing {
             artifactId = 'currency-picker-android'
             version = System.getenv("RELEASE_VERSION")
         }
+
+        afterEvaluate {
+            from components.release
+        }
     }
 
     repositories {
