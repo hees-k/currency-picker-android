@@ -1,5 +1,3 @@
-
-
 # Currency Picker for Android
 
  [![](https://jitpack.io/v/hees-k/currency-picker-android.svg)](https://jitpack.io/#hees-k/currency-picker-android) [![](https://travis-ci.com/hees-k/currency-picker-android.svg?branch=master)](https://travis-ci.com/hees-k/currency-picker-android) [![](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/heeseok7)
