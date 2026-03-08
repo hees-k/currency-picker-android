@@ -53,9 +53,6 @@ publishing {
             groupId = 'io.github.hees-k'
             artifactId = 'currency-picker-android'
             version = System.getenv("RELEASE_VERSION")
-        }
-        
-        afterEvaluate {
             artifact("$buildDir/outputs/aar/currencypicker-release.aar")
         }
     }
