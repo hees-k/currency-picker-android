@@ -52,7 +52,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.github.hees-k'
             artifactId = 'currency-picker-android'
-            version = '0.0.0'
+            version = System.getenv("RELEASE_VERSION")
 
             afterEvaluate {
                 from components.release
