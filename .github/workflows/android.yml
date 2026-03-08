@@ -61,4 +61,5 @@ jobs:
       with:
         token: ${{ secrets.PAT_TOKEN }}
         repository: hees-k/currency-picker-android
+        tag_name: ${{ github.event.inputs.release-version }}
         files: currencypicker/build/outputs/aar/currencypicker-release.aar
