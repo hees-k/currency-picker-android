@@ -43,6 +43,7 @@ jobs:
       env:
         GPR_USER: ${{ github.actor }}
         GPR_KEY: ${{ secrets.PAT_TOKEN }}
+        RELEASE_VERSION: ${{ github.event.inputs.release-version }}
         
     - name: Create Release ✅
       id: create_release
