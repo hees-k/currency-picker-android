@@ -53,10 +53,6 @@ publishing {
             groupId = 'io.github.hees-k'
             artifactId = 'currency-picker-android'
             version = System.getenv("RELEASE_VERSION")
-
-            afterEvaluate {
-                from components.release
-            }
         }
     }
 
@@ -65,7 +61,6 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/hees-k/forked_libraries")
             credentials {
-                // Use environment variables from GitHub Actions secrets
                 username = System.getenv("GPR_USER")
                 password = System.getenv("GPR_KEY")
             }
