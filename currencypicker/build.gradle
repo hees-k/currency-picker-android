@@ -54,6 +54,7 @@ publishing {
             artifactId = 'currency-picker-android'
             version = System.getenv("RELEASE_VERSION")
             artifact("$buildDir/outputs/aar/currencypicker-release.aar")
+            artifact(tasks.named("releaseSourcesJar"))
         }
     }
 
