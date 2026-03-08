@@ -6,6 +6,19 @@ on:
   pull_request:
     branches: [ "master" ]
 
+  workflow_dispatch:
+    inputs:
+      should-publish:
+        type: boolean
+        description: "Do you want to publish the library?"
+        default: false
+        required: true
+
+      release-version:
+        type: string
+        description: "Specify the version to release"
+        required: true
+
 jobs:
   build:
 
@@ -43,11 +56,9 @@ jobs:
         prerelease: false
         
     - name: Upload Library AAR 🗳
-      uses: actions/upload-release-asset@v1
+      if: always() && (github.event.inputs.should-publish == 'true')
+      uses: softprops/action-gh-release@v2
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: currencypicker/build/outputs/aar/currencypicker-release.aar
-        asset_name: currencypicker.aar
-        asset_content_type: application/aar
+        files: currencypicker/build/outputs/aar/currencypicker-release.aar
