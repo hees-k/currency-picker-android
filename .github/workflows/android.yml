@@ -40,27 +40,29 @@ jobs:
 
     - name: Publish to GitHub Package Registry 🚀
       run: bash ./gradlew :currencypicker:publish
+      if: always() && (github.event.inputs.should-publish == 'true')
       env:
         GPR_USER: ${{ github.actor }}
         GPR_KEY: ${{ secrets.PAT_TOKEN }}
         RELEASE_VERSION: ${{ github.event.inputs.release-version }}
         
-    - name: Create Release ✅
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        draft: true
-        prerelease: false
+    # - name: Create Release ✅
+    #   id: create_release
+    #   if: always() && (github.event.inputs.should-publish == 'true')
+    #   uses: actions/create-release@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+    #   with:
+    #     tag_name: ${{ github.ref }}
+    #     release_name: ${{ github.ref }}
+    #     draft: true
+    #     prerelease: false
         
     - name: Upload Library AAR 🗳
       if: always() && (github.event.inputs.should-publish == 'true')
       uses: softprops/action-gh-release@v2
       with:
         token: ${{ secrets.PAT_TOKEN }}
-        repository: hees-k/currency-picker-android
-        tag_name: ${{ github.event.inputs.release-version }}
+        repository: hees-k/forked_libraries
+        tag_name: 'currency-picker-android_${{ github.event.inputs.release-version }}'
         files: currencypicker/build/outputs/aar/currencypicker-release.aar
