@@ -59,4 +59,16 @@ publishing {
             }
         }
     }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/hees-k/currency-picker-android")
+            credentials {
+                // Use environment variables from GitHub Actions secrets
+                username = System.getenv("GPR_USER")
+                password = System.getenv("GPR_KEY")
+            }
+        }
+    }    
 }
