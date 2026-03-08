@@ -1,10 +1,10 @@
 name: Android CI
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  # push:
+  #   branches: [ "master" ]
+  # pull_request:
+  #   branches: [ "master" ]
 
   workflow_dispatch:
     inputs:
@@ -58,7 +58,7 @@ jobs:
     - name: Upload Library AAR 🗳
       if: always() && (github.event.inputs.should-publish == 'true')
       uses: softprops/action-gh-release@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
       with:
+        token: ${{ secrets.PAT_TOKEN }}
+        repository: hees-k/currency-picker-android
         files: currencypicker/build/outputs/aar/currencypicker-release.aar
