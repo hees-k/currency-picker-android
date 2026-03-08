@@ -50,7 +50,7 @@ dependencies {
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = 'com.github.hees-k'
+            groupId = 'io.github.hees-k'
             artifactId = 'currency-picker-android'
             version = System.getenv("RELEASE_VERSION")
 
