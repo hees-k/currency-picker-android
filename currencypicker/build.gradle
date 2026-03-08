@@ -54,9 +54,9 @@ publishing {
             artifactId = 'currency-picker-android'
             version = System.getenv("RELEASE_VERSION")
         }
-
+        
         afterEvaluate {
-            from components.release
+            artifact("$buildDir/outputs/aar/currencypicker-release.aar")
         }
     }
 
