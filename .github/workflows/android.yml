@@ -24,3 +24,30 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+
+    - name: Publish to GitHub Package Registry 🚀
+      run: bash ./gradlew :currencypicker:publish
+      env:
+        GPR_USER: ${{ github.actor }}
+        GPR_KEY: ${{ secrets.PAT_TOKEN }}
+        
+    - name: Create Release ✅
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
+        draft: true
+        prerelease: false
+        
+    - name: Upload Library AAR 🗳
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: currencypicker/build/outputs/aar/currencypicker-release.aar
+        asset_name: currencypicker.aar
+        asset_content_type: application/aar
